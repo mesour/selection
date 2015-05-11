@@ -65,6 +65,8 @@ require_once SRC_DIR . 'Selection.php';
 
     foreach($items as $id => $status) {
         $selection->renderItem($id);
+        echo " ID: $id, Status: $status";
+        echo "<br><br>";
     }
 
     ?>

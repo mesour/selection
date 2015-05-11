@@ -1,8 +1,8 @@
 {
-  "name": "mesour/table",
-  "description": "Mesour Table component.",
+  "name": "mesour/selection",
+  "description": "Mesour Selection component.",
   "license": ["BSD-3-Clause","GPL-3.0"],
-  "keywords": ["table","component"],
+  "keywords": ["selection","component"],
   "homepage": "http://mesour.com",
   "authors": [{
       "name": "Matouš Němec",
