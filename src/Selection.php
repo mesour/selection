@@ -14,7 +14,7 @@ use Mesour\Components;
  * @author mesour <matous.nemec@mesour.com>
  * @package Mesour Selection Component
  */
-class Selection extends Control
+class Selection extends Control implements ISelection
 {
 
     const ITEMS = 'items',
