@@ -68,7 +68,7 @@ class Selection extends Control implements ISelection
 
     public function __construct($name = NULL, Components\IComponent $parent = NULL)
     {
-        if(is_null($name)) {
+        if (is_null($name)) {
             throw new Components\InvalidArgumentException('Component name is required.');
         }
         parent::__construct($name, $parent);
@@ -91,7 +91,7 @@ class Selection extends Control implements ISelection
 
     public function setItems(array $items)
     {
-        foreach($items as $id => $status) {
+        foreach ($items as $id => $status) {
             $this->setItem($id, $status);
         }
         return $this;
@@ -100,13 +100,13 @@ class Selection extends Control implements ISelection
     protected function getItemPrototype($item_id)
     {
         $attributes = $this->option[self::ITEMS]['attributes'];
-        if(count($this->items) > 0) {
+        if (count($this->items) > 0) {
             $attributes['data-status'] = implode('|', $this->items[$item_id]);
         }
 
         $attributes = array_merge($attributes, array(
             'data-id' => $item_id,
-            'data-name' => $this->getName(),
+            'data-name' => $this->createLinkName(),
         ));
         return Components\Html::el($this->option[self::ITEMS]['el'], $attributes)->setHtml($this->option[self::ITEMS]['content']);
     }
@@ -116,7 +116,8 @@ class Selection extends Control implements ISelection
      * @param $text
      * @return $this
      */
-    public function addStatus($status, $text) {
+    public function addStatus($status, $text)
+    {
         $this->getDropDown()->addButton($text)
             ->setAttribute('href', '#')
             ->setAttribute('data-status', $status);
@@ -126,12 +127,13 @@ class Selection extends Control implements ISelection
     /**
      * @return DropDown
      */
-    public function getDropDown() {
-        if(!isset($this['dropDown'])) {
+    public function getDropDown()
+    {
+        if (!isset($this['dropDown'])) {
             $this['dropDown'] = $dropDown = new DropDown;
             $dropDown->getControlPrototype()
                 ->class($this->option[self::DROP_DOWN]['class'])
-                ->{'data-name'}($this->getName());
+                ->{'data-name'}($this->createLinkName());
         }
         return $this['dropDown'];
     }
@@ -140,22 +142,25 @@ class Selection extends Control implements ISelection
     {
         $attributes = $this->option[self::MAIN]['attributes'];
         $attributes = array_merge($attributes, array(
-            'data-name' => $this->getName(),
+            'data-name' => $this->createLinkName(),
         ));
         return $this->mainCheckbox ? $this->mainCheckbox : ($this->mainCheckbox = Components\Html::el($this->option[self::MAIN]['el'], $attributes)->setHtml($this->option[self::MAIN]['content']));
     }
 
-    public function createItem($item_id, $data = array()) {
+    public function createItem($item_id, $data = array())
+    {
         $item = $this->getItemPrototype($item_id);
 
         return $item;
     }
 
-    public function renderItem($item_id, $data = array()) {
+    public function renderItem($item_id, $data = array())
+    {
         echo $this->createItem($item_id, $data);
     }
 
-    public function create($data = array()) {
+    public function create($data = array())
+    {
         parent::create();
 
         $main = $this->getMainCheckboxPrototype();
@@ -168,7 +173,7 @@ class Selection extends Control implements ISelection
 
         $button->setHtml($main);
 
-        if(count($dropdown->getItems()) > 0) {
+        if (count($dropdown->getItems()) > 0) {
             $dropdown->addDivider();
         }
 
