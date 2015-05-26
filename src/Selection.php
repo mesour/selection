@@ -100,10 +100,13 @@ class Selection extends Control implements ISelection
     protected function getItemPrototype($item_id)
     {
         $attributes = $this->option[self::ITEMS]['attributes'];
+        if(count($this->items) > 0) {
+            $attributes['data-status'] = implode('|', $this->items[$item_id]);
+        }
+
         $attributes = array_merge($attributes, array(
             'data-id' => $item_id,
             'data-name' => $this->getName(),
-            'data-status' => implode('|', $this->items[$item_id]),
         ));
         return Components\Html::el($this->option[self::ITEMS]['el'], $attributes)->setHtml($this->option[self::ITEMS]['content']);
     }

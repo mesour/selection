@@ -171,7 +171,5 @@ mesour.selection = !mesour.selection ? {} : mesour.selection;
         }
     }));
 
-    $(document).on('ready', function() {
-        mesour.selection.create();
-    });
+    mesour.on.live('grid-selection', mesour.selection.create);
 })(jQuery);
