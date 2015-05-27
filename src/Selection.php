@@ -66,7 +66,7 @@ class Selection extends Control implements ISelection
         )
     );
 
-    public function __construct($name = NULL, Components\IComponent $parent = NULL)
+    public function __construct($name = NULL, Components\IContainer $parent = NULL)
     {
         if (is_null($name)) {
             throw new Components\InvalidArgumentException('Component name is required.');

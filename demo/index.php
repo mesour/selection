@@ -7,7 +7,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="../docs/js/jquery.min.js"></script>
 <script src="../docs/js/bootstrap.min.js"></script>
-<script src="../public/mesour.components.js"></script>
+<script src="../vendor/mesour/components/public/mesour.components.js"></script>
 <script src="../public/mesour.selection.js"></script>
 <script src="../docs/js/main.js"></script>
 
@@ -25,12 +25,11 @@ define('SRC_DIR', __DIR__ . '/../src/');
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+@mkdir(__DIR__ . '/log');
+
 \Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__ . '/log');
 
 require_once SRC_DIR . 'Selection.php';
-
-
-\Mesour\UI\Control::$default_link = new \Mesour\Components\Link\Link();
 
 ?>
 
