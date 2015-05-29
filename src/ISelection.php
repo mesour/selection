@@ -8,13 +8,13 @@
 
 namespace Mesour\UI;
 
-use Mesour\Components\IComponent;
+use Mesour\Components\IContainer;
 
 /**
  * @author mesour <http://mesour.com>
  * @package Mesour Selection Component
  */
-interface ISelection extends IComponent
+interface ISelection extends IContainer
 {
 
     public function setItem($id, $status);
