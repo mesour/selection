@@ -95,6 +95,7 @@ mesour.selection = !mesour.selection ? {} : mesour.selection;
             } else {
                 _inactive(element, options);
             }
+            element.trigger('change.selection');
         };
         element.on({
             'click.selection': function(e) {
@@ -114,6 +115,7 @@ mesour.selection = !mesour.selection ? {} : mesour.selection;
         var toggle = function() {
             _toggle(element, options);
             mainCheckbox.trigger('selection-change.selection');
+            element.trigger('change.selection');
         };
         element.on({
             'click.selection': function() {
@@ -132,6 +134,14 @@ mesour.selection = !mesour.selection ? {} : mesour.selection;
                 values[_item.attr(options.idAttr)] = _item.hasClass(options.item.activeClass);
             });
             return values;
+        };
+
+        this.getItems = function(name) {
+            return $(options.itemsSelector).filter('['+options.nameAttr+'="'+name+'"]');
+        };
+
+        this.getMainCheckbox = function(name) {
+            return $(options.mainSelector).filter('['+options.nameAttr+'="'+name+'"]');
         };
 
         this.create = function() {
