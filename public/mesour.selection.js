@@ -26,7 +26,8 @@ mesour.selection = !mesour.selection ? {} : mesour.selection;
     var CheckboxHelper = function(element, options, parentOptions) {
         var name = element.attr(parentOptions.nameAttr);
 
-        element.find('[data-status]').on('click', function() {
+        element.find('[data-status]').on('click', function(e) {
+            e.preventDefault();
             var $this = $(this),
                 status = $this.attr('data-status');
             if(status === 'm_-inverse') {
