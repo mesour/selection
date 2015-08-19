@@ -29,6 +29,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 \Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__ . '/log');
 
+require_once SRC_DIR . 'ISelection.php';
 require_once SRC_DIR . 'Selection.php';
 
 ?>

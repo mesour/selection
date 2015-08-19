@@ -101,7 +101,7 @@ class Selection extends Control implements ISelection
     {
         $attributes = $this->option[self::ITEMS]['attributes'];
         if (count($this->items) > 0) {
-            $attributes['data-status'] = implode('|', array_keys($this->items[$item_id]));
+            $attributes['data-status'] = implode('|', $this->items[$item_id]);
         }
 
         $attributes = array_merge($attributes, array(

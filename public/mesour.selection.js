@@ -1,7 +1,9 @@
 /**
- * Mesour Selection Component - selection.js
+ * This file is part of the Mesour Selection (http://grid.mesour.com)
  *
- * @author Matous Nemec (http://mesour.com)
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
  */
 var mesour = !mesour ? {} : mesour;
 mesour.selection = !mesour.selection ? {} : mesour.selection;

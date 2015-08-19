@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Mesour\Table</title>
+    <title>Mesour\Selection</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Mesour\Table</a>
+            <a class="navbar-brand" href="index.html">Mesour\Selection</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -59,7 +59,7 @@
             <div class="row">
 
                 <span id="button" class="anchor">&nbsp;</span>
-                <h1>Mesour\Table</h1>
+                <h1>Mesour\Selection</h1>
 
                 <div class="row">
                     <div class="col-xs-6 col-lg-6">
@@ -68,7 +68,7 @@
                         <ul>
                             <li>PHP >= 5.4</li>
                             <li>Mesour\Components</li>
-                            <li><i>Mesour\array-manager (only if using ArraySource)</i></li>
+                            <li>Mesour\DropDown</li>
                         </ul>
                         <p><span class="label label-info">Client:</span></p>
                         <ul>
@@ -88,86 +88,140 @@
                 </div>
 
                 <span id="features" class="anchor">&nbsp;</span>
+
+                <div class="container">
+                    <h2>Basic functionality</h2>
+
+                    <hr>
+
+                    <div class="dropdown selection-dropdown" data-name="test">
+                        <button class="btn btn-default" data-toggle="dropdown" id=
+                                "55d4e4ef289ab"><a class="btn btn-xs main-checkbox btn-default"
+                                                   data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;<span class="caret"></span></button>
+
+                        <ul class="dropdown-menu">
+                            <li class="">
+                                <a class="" data-status="active" href="#" tabindex=
+                                        "-1">Active</a>
+                            </li>
+
+                            <li class="">
+                                <a class="" data-status="inactive" href="#" tabindex=
+                                        "-1">Inactive</a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li class="">
+                                <a class="" data-status="m_-inverse" href="#" tabindex=
+                                        "-1">Inverse selection</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <br><br><br>
+
+                    <a class="btn btn-xs select-checkbox btn-default" data-id="1" data-name=
+                            "test" data-status="active">&nbsp;&nbsp;&nbsp;&nbsp;</a> ID: 1, Status: active<br><br>
+                    <a class="btn btn-xs select-checkbox btn-default" data-id="2" data-name=
+                            "test" data-status="inactive">&nbsp;&nbsp;&nbsp;&nbsp;</a> ID: 2, Status: inactive<br><br>
+                    <a class="btn btn-xs select-checkbox btn-default" data-id="3" data-name=
+                            "test" data-status="inactive">&nbsp;&nbsp;&nbsp;&nbsp;</a> ID: 3, Status: inactive<br><br>
+                    <a class="btn btn-xs select-checkbox btn-default" data-id="4" data-name=
+                            "test" data-status="active">&nbsp;&nbsp;&nbsp;&nbsp;</a> ID: 4, Status: active<br><br>
+                    <a class="btn btn-xs select-checkbox btn-default" data-id="5" data-name=
+                            "test" data-status="inactive">&nbsp;&nbsp;&nbsp;&nbsp;</a> ID: 5, Status: inactive
+
+                    <hr>
+                    <br><br><br><br>
+
+
                 <h2>Features</h2>
 
                 <p>Init:</p>
 
-                <pre>$table = new \Mesour\UI\Table();
+                <pre>$selection = new \Mesour\UI\Selection('test');
 
-$data = array(
-    array(
-        'method' => 'setName',
-        'params' => '$name',
-        'returns' => 'Mesour\Table\Column',
-        'description' => 'Set column name.',
-    ),
-    array(
-        'method' => 'setHeader',
-        'params' => '$header',
-        'returns' => 'Mesour\Table\Column',
-        'description' => 'Set header text.',
-    ),
-    array(
-        'method' => 'setCallback',
-        'params' => '$callback',
-        'returns' => 'Mesour\Table\Column',
-        'description' => 'Set render callback.',
-    )
+$items = array(
+    1 => 'active',
+    2 => 'inactive',
+    3 => 'inactive',
+    4 => 'active',
+    5 => 'inactive',
 );
 
-$table->setSource($data);
+$selection->setItems($items);
 
-$table->setAttribute('class', 'table table-striped table-hover');
+$selection->addStatus('active', 'Active');
 
-$table->addColumn('method', 'Method')
-    ->setCallback(function($data) {
-        return \Mesour\Components\Html::el('b')->setText($data['method']);
-    });
+$selection->addStatus('inactive', 'Inactive');
 
-$table->addColumn('params', 'Parameters');
+$selection->render();
 
-$table->addColumn('returns', 'Returns');
-
-$table->addColumn('description', 'Description');
-
-$table->render();</pre>
+foreach($items as $id => $status) {
+    $selection->renderItem($id);
+    echo " ID: $id, Status: $status";
+    echo "&lt;br&gt;";
+}</pre>
 
                 <p>Output:</p>
 
-                <pre>&lt;table class=&quot;table table-striped table-hover&quot;&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Method&lt;/th&gt;
-            &lt;th&gt;Parameters&lt;/th&gt;
-            &lt;th&gt;Returns&lt;/th&gt;
-            &lt;th&gt;Description&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;b&gt;setName&lt;/b&gt;&lt;/td&gt;
-            &lt;td&gt;$name&lt;/td&gt;
-            &lt;td&gt;Mesour\Table\Column&lt;/td&gt;
-            &lt;td&gt;Set column name.&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;b&gt;setHeader&lt;/b&gt;&lt;/td&gt;
-            &lt;td&gt;$header&lt;/td&gt;
-            &lt;td&gt;Mesour\Table\Column&lt;/td&gt;
-            &lt;td&gt;Set header text.&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;b&gt;setCallback&lt;/b&gt;&lt;/td&gt;
-            &lt;td&gt;$callback&lt;/td&gt;
-            &lt;td&gt;Mesour\Table\Column&lt;/td&gt;
-            &lt;td&gt;Set render callback.&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;</pre>
+                <pre>&lt;div class=&quot;dropdown selection-dropdown&quot; data-name=&quot;test&quot;&gt;
+&lt;button class=&quot;btn btn-default&quot; data-toggle=&quot;dropdown&quot; id=
+        &quot;55d4e4ef289ab&quot;&gt;&lt;a class=&quot;btn btn-xs main-checkbox btn-default&quot;
+                           data-name=&quot;test&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt;&amp;nbsp;&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
 
-                <p>Demo:</p>
+&lt;ul class=&quot;dropdown-menu&quot;&gt;
+    &lt;li class=&quot;&quot;&gt;
+        &lt;a class=&quot;&quot; data-status=&quot;active&quot; href=&quot;#&quot; tabindex=
+                &quot;-1&quot;&gt;Active&lt;/a&gt;
+    &lt;/li&gt;
 
-                <table class="table table-striped table-hover"><thead><tr><th>Method</th><th>Parameters</th><th>Returns</th><th>Description</th></tr></thead><tbody><tr><td><b>setName</b></td><td>$name</td><td>Mesour\Table\Column</td><td>Set column name.</td></tr><tr><td><b>setHeader</b></td><td>$header</td><td>Mesour\Table\Column</td><td>Set header text.</td></tr><tr><td><b>setCallback</b></td><td>$callback</td><td>Mesour\Table\Column</td><td>Set render callback.</td></tr></tbody></table>
+    &lt;li class=&quot;&quot;&gt;
+        &lt;a class=&quot;&quot; data-status=&quot;inactive&quot; href=&quot;#&quot; tabindex=
+                &quot;-1&quot;&gt;Inactive&lt;/a&gt;
+    &lt;/li&gt;
+
+    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+
+    &lt;li class=&quot;&quot;&gt;
+        &lt;a class=&quot;&quot; data-status=&quot;m_-inverse&quot; href=&quot;#&quot; tabindex=
+                &quot;-1&quot;&gt;Inverse selection&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;a class=&quot;btn btn-xs select-checkbox btn-default&quot; data-id=&quot;1&quot; data-name=
+    &quot;test&quot; data-status=&quot;active&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt; ID: 1, Status: active&lt;br&gt;&lt;br&gt;
+&lt;a class=&quot;btn btn-xs select-checkbox btn-default&quot; data-id=&quot;2&quot; data-name=
+    &quot;test&quot; data-status=&quot;inactive&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt; ID: 2, Status: inactive&lt;br&gt;&lt;br&gt;
+&lt;a class=&quot;btn btn-xs select-checkbox btn-default&quot; data-id=&quot;3&quot; data-name=
+    &quot;test&quot; data-status=&quot;inactive&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt; ID: 3, Status: inactive&lt;br&gt;&lt;br&gt;
+&lt;a class=&quot;btn btn-xs select-checkbox btn-default&quot; data-id=&quot;4&quot; data-name=
+    &quot;test&quot; data-status=&quot;active&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt; ID: 4, Status: active&lt;br&gt;&lt;br&gt;
+&lt;a class=&quot;btn btn-xs select-checkbox btn-default&quot; data-id=&quot;5&quot; data-name=
+    &quot;test&quot; data-status=&quot;inactive&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/a&gt; ID: 5, Status: inactive</pre>
+
+                    <br><br><br><br><br>
+
+                    <h2>Using JS API</h2>
+
+                    <br><p>Getting values</p>
+
+                    <pre>mesour.selection.getValues('test')
+
+//example output: Object {1: true, 2: false, 3: true, 4: false, 5: false}
+//keys from given items</pre>
+
+                    <br><p>Getting items for selection with name "test"</p>
+
+                    <pre>mesour.selection.getItems('test'); //returns array with html nodes</pre>
+
+                    <br><p>Getting main checkbox HTML node</p>
+
+                    <pre>mesour.selection.getMainCheckbox('test')</pre>
 
             </div>
             <!--/row-->
@@ -196,6 +250,9 @@ $table->render();</pre>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+<script src="../vendor/mesour/components/public/mesour.components.js"></script>
+<script src="../public/mesour.selection.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
