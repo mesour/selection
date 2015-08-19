@@ -1,9 +1,10 @@
 <?php
 /**
- * Mesour Selection Component
+ * This file is part of the Mesour Selection (http://grid.mesour.com)
  *
- * @license LGPL-3.0 and BSD-3-Clause
- * @copyright (c) 2015 Matous Nemec <http://mesour.com>
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
  */
 
 namespace Mesour\UI;
@@ -11,8 +12,7 @@ namespace Mesour\UI;
 use Mesour\Components\IContainer;
 
 /**
- * @author mesour <http://mesour.com>
- * @package Mesour Selection Component
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
 interface ISelection extends IContainer
 {
