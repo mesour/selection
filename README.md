@@ -7,8 +7,6 @@
 
 - With [Composer](https://getcomposer.org)
 
-        "require": {
-            "mesour/selection": "dev-master"
-        }
+        composer require mesour/selection
 
 - Or download source from [GitHub](https://github.com/mesour/Selection/releases)
