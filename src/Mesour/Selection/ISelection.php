@@ -7,14 +7,14 @@
  * For full licence and copyright please view the file licence.md in root of this project
  */
 
-namespace Mesour\UI;
+namespace Mesour\Selection;
 
-use Mesour\Components\IContainer;
+use Mesour;
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
-interface ISelection extends IContainer
+interface ISelection extends Mesour\Components\ComponentModel\IContainer
 {
 
     public function setItem($id, $status);
@@ -29,16 +29,16 @@ interface ISelection extends IContainer
     public function addStatus($status, $text);
 
     /**
-     * @return DropDown
+     * @return Mesour\UI\DropDown
      */
     public function getDropDown();
 
     public function getMainCheckboxPrototype();
 
-    public function createItem($item_id, $data = array());
+    public function createItem($item_id, $data = []);
 
-    public function renderItem($item_id, $data = array());
+    public function renderItem($item_id, $data = []);
 
-    public function create($data = array());
+    public function create($data = []);
 
 }

@@ -9,12 +9,14 @@
 
 namespace Mesour\UI;
 
-use Mesour\Components;
+use Mesour;
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
+ *
+ * @method null onRender(Selection $selection)
  */
-class Selection extends Control implements ISelection
+class Selection extends Mesour\Components\Control\OptionsControl implements Mesour\Selection\ISelection
 {
 
     const ITEMS = 'items',
@@ -25,65 +27,53 @@ class Selection extends Control implements ISelection
      * Array of items ID => string|array (statuses)
      * @var array
      */
-    protected $items = array();
+    protected $items = [];
 
-    protected $option = array();
-
-    /**
-     * @var Components\Html
-     */
+    /** @var Mesour\Components\Utils\Html */
     protected $mainCheckbox;
 
-    /**
-     * @var Components\Html
-     */
-    protected $wrapper;
-
-    /**
-     * @var Components\Html
-     */
+    /** @var Mesour\Components\Utils\Html */
     protected $button;
 
-    public $onRender = array();
+    public $onRender = [];
 
-    static public $defaults = array(
-        self::MAIN => array(
+    public $defaults = [
+        self::MAIN => [
             'el' => 'a',
-            'attributes' => array(
+            'attributes' => [
                 'class' => 'btn btn-default btn-xs main-checkbox',
-            ),
+            ],
             'content' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-        ),
-        self::ITEMS => array(
+        ],
+        self::ITEMS => [
             'el' => 'a',
-            'attributes' => array(
+            'attributes' => [
                 'class' => 'btn btn-default btn-xs select-checkbox',
-            ),
+            ],
             'content' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-        ),
-        self::DROP_DOWN => array(
+        ],
+        self::DROP_DOWN => [
             'class' => 'dropdown selection-dropdown'
-        )
-    );
+        ]
+    ];
 
-    public function __construct($name = NULL, Components\IContainer $parent = NULL)
+    public function __construct($name = NULL, Mesour\Components\ComponentModel\IContainer $parent = NULL)
     {
         if (is_null($name)) {
-            throw new Components\InvalidArgumentException('Component name is required.');
+            throw new Mesour\InvalidStateException('Component name is required.');
         }
         parent::__construct($name, $parent);
-        $this->option = self::$defaults;
     }
 
     public function setItem($id, $status)
     {
-        $statuses = array();
+        $statuses = [];
         if (is_string($status)) {
             $statuses[] = $status;
         } elseif (is_array($status)) {
             $statuses = $status;
         } else {
-            throw new Components\InvalidArgumentException('Status must be string or array. ' . gettype($status) . ' given.');
+            throw new Mesour\InvalidArgumentException('Status must be string or array. ' . gettype($status) . ' given.');
         }
         $this->items[$id] = $statuses;
         return $this;
@@ -99,16 +89,17 @@ class Selection extends Control implements ISelection
 
     protected function getItemPrototype($item_id)
     {
-        $attributes = $this->option[self::ITEMS]['attributes'];
+        $attributes = $this->getOption(self::ITEMS, 'attributes');
         if (count($this->items) > 0) {
             $attributes['data-status'] = implode('|', $this->items[$item_id]);
         }
 
-        $attributes = array_merge($attributes, array(
+        $attributes = array_merge($attributes, [
             'data-id' => $item_id,
             'data-name' => $this->createLinkName(),
-        ));
-        return Components\Html::el($this->option[self::ITEMS]['el'], $attributes)->setHtml($this->option[self::ITEMS]['content']);
+        ]);
+        return Mesour\Components\Utils\Html::el($this->getOption(self::ITEMS, 'el'), $attributes)
+            ->setHtml($this->getOption(self::ITEMS, 'content'));
     }
 
     /**
@@ -131,35 +122,39 @@ class Selection extends Control implements ISelection
     {
         if (!isset($this['dropDown'])) {
             $this['dropDown'] = $dropDown = new DropDown;
-            $dropDown->getControlPrototype()
-                ->class($this->option[self::DROP_DOWN]['class'])
-                ->{'data-name'}($this->createLinkName());
+            $dropDown->setAttribute('class', $this->getOption(self::DROP_DOWN, 'class'))
+                ->setAttribute('data-name', $this->createLinkName());
         }
         return $this['dropDown'];
     }
 
     public function getMainCheckboxPrototype()
     {
-        $attributes = $this->option[self::MAIN]['attributes'];
-        $attributes = array_merge($attributes, array(
+        $attributes = $this->getOption(self::MAIN, 'attributes');
+        $attributes = array_merge($attributes, [
             'data-name' => $this->createLinkName(),
-        ));
-        return $this->mainCheckbox ? $this->mainCheckbox : ($this->mainCheckbox = Components\Html::el($this->option[self::MAIN]['el'], $attributes)->setHtml($this->option[self::MAIN]['content']));
+        ]);
+        return $this->mainCheckbox
+            ? $this->mainCheckbox
+            : ($this->mainCheckbox = Mesour\Components\Utils\Html::el(
+                $this->getOption(self::MAIN, 'el'),
+                $attributes)->setHtml($this->getOption(self::MAIN, 'content')
+            ));
     }
 
-    public function createItem($item_id, $data = array())
+    public function createItem($item_id, $data = [])
     {
         $item = $this->getItemPrototype($item_id);
 
         return $item;
     }
 
-    public function renderItem($item_id, $data = array())
+    public function renderItem($item_id, $data = [])
     {
         echo $this->createItem($item_id, $data);
     }
 
-    public function create($data = array())
+    public function create($data = [])
     {
         parent::create();
 
