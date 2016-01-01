@@ -41,14 +41,14 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
         self::MAIN => [
             'el' => 'a',
             'attributes' => [
-                'class' => 'btn btn-default btn-xs main-checkbox',
+                'class' => 'btn btn-default btn-xs mesour-main-checkbox',
             ],
             'content' => '&nbsp;&nbsp;&nbsp;&nbsp;',
         ],
         self::ITEMS => [
             'el' => 'a',
             'attributes' => [
-                'class' => 'btn btn-default btn-xs select-checkbox',
+                'class' => 'btn btn-default btn-xs mesour-select-checkbox',
             ],
             'content' => '&nbsp;&nbsp;&nbsp;&nbsp;',
         ],
@@ -73,7 +73,9 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
         } elseif (is_array($status)) {
             $statuses = $status;
         } else {
-            throw new Mesour\InvalidArgumentException('Status must be string or array. ' . gettype($status) . ' given.');
+            throw new Mesour\InvalidArgumentException(
+                sprintf('Status must be string or array. %s given.', gettype($status))
+            );
         }
         $this->items[$id] = $statuses;
         return $this;
@@ -133,6 +135,7 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
         $attributes = $this->getOption(self::MAIN, 'attributes');
         $attributes = array_merge($attributes, [
             'data-name' => $this->createLinkName(),
+            'data-icon-prefix' => $this->createNewIcon('cog')->getPrefix()
         ]);
         return $this->mainCheckbox
             ? $this->mainCheckbox
