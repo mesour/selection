@@ -1,7 +1,7 @@
 {
   "name": "mesour/selection",
   "description": "Mesour Selection component.",
-  "license": ["BSD-3-Clause","GPL-3.0"],
+  "license": ["BSD-3-Clause","GPL-2.0","GPL-3.0"],
   "keywords": ["selection","component"],
   "homepage": "http://mesour.com",
   "authors": [{
@@ -10,13 +10,13 @@
   }],
   "require": {
     "php": ">=5.5.0",
-    "mesour/components": "@dev",
-    "mesour/dropdown": "@dev"
+    "mesour/components": "3.0.*@beta",
+    "mesour/dropdown": "3.0.*@beta"
   },
   "require-dev": {
     "tracy/tracy": "~2.3.0"
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "beta",
   "autoload": {
     "classmap": ["src/"]
   }
