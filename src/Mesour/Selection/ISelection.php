@@ -17,28 +17,28 @@ use Mesour;
 interface ISelection extends Mesour\Components\ComponentModel\IContainer
 {
 
-    public function setItem($id, $status);
+	public function setItem($id, $status);
 
-    public function setItems(array $items);
+	public function setItems(array $items);
 
-    /**
-     * @param $status
-     * @param $text
-     * @return mixed
-     */
-    public function addStatus($status, $text);
+	/**
+	 * @param $status
+	 * @param $text
+	 * @return mixed
+	 */
+	public function addStatus($status, $text);
 
-    /**
-     * @return Mesour\UI\DropDown
-     */
-    public function getDropDown();
+	/**
+	 * @return Mesour\UI\DropDown
+	 */
+	public function getDropDown();
 
-    public function getMainCheckboxPrototype();
+	public function getMainCheckboxPrototype();
 
-    public function createItem($item_id, $data = []);
+	public function createItem($item_id, $data = []);
 
-    public function renderItem($item_id, $data = []);
+	public function renderItem($item_id, $data = []);
 
-    public function create($data = []);
+	public function create($data = []);
 
 }
