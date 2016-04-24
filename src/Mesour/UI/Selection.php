@@ -12,7 +12,7 @@ namespace Mesour\UI;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  *
  * @method null onRender(Selection $selection)
  */
@@ -20,7 +20,9 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
 {
 
 	const ITEMS = 'items';
+
 	const DROP_DOWN = 'drop-down';
+
 	const MAIN = 'main';
 
 	/**
@@ -89,24 +91,27 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
 		return $this;
 	}
 
-	protected function getItemPrototype($item_id)
+	protected function getItemPrototype($itemId)
 	{
 		$attributes = $this->getOption(self::ITEMS, 'attributes');
 		if (count($this->items) > 0) {
-			$attributes['data-status'] = implode('|', $this->items[$item_id]);
+			$attributes['data-status'] = implode('|', $this->items[$itemId]);
 		}
 
-		$attributes = array_merge($attributes, [
-			'data-id' => $item_id,
-			'data-name' => $this->createLinkName(),
-		]);
+		$attributes = array_merge(
+			$attributes,
+			[
+				'data-id' => $itemId,
+				'data-name' => $this->createLinkName(),
+			]
+		);
 		return Mesour\Components\Utils\Html::el($this->getOption(self::ITEMS, 'el'), $attributes)
 			->setHtml($this->getOption(self::ITEMS, 'content'));
 	}
 
 	/**
-	 * @param $status
-	 * @param $text
+	 * @param string $status
+	 * @param string $text
 	 * @return $this
 	 */
 	public function addStatus($status, $text)
@@ -133,28 +138,33 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
 	public function getMainCheckboxPrototype()
 	{
 		$attributes = $this->getOption(self::MAIN, 'attributes');
-		$attributes = array_merge($attributes, [
-			'data-name' => $this->createLinkName(),
-			'data-icon-prefix' => $this->createNewIcon('cog')->getPrefix(),
-		]);
+		$attributes = array_merge(
+			$attributes,
+			[
+				'data-name' => $this->createLinkName(),
+				'data-icon-prefix' => $this->createNewIcon('cog')->getPrefix(),
+			]
+		);
 		return $this->mainCheckbox
 			? $this->mainCheckbox
 			: ($this->mainCheckbox = Mesour\Components\Utils\Html::el(
 				$this->getOption(self::MAIN, 'el'),
-				$attributes)->setHtml($this->getOption(self::MAIN, 'content')
+				$attributes
+			)->setHtml(
+				$this->getOption(self::MAIN, 'content')
 			));
 	}
 
-	public function createItem($item_id, $data = [])
+	public function createItem($itemId, $data = [])
 	{
-		$item = $this->getItemPrototype($item_id);
+		$item = $this->getItemPrototype($itemId);
 
 		return $item;
 	}
 
-	public function renderItem($item_id, $data = [])
+	public function renderItem($itemId, $data = [])
 	{
-		echo $this->createItem($item_id, $data);
+		echo $this->createItem($itemId, $data);
 	}
 
 	public function create($data = [])

@@ -2,5 +2,7 @@
 /vendor
 /composer.lock
 /tests/tmp
+/tests/Mesour/SelectionTests/output
 /tests/log
+/tests/environment.php
 /examples/log

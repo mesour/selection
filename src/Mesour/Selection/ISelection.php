@@ -12,7 +12,7 @@ namespace Mesour\Selection;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 interface ISelection extends Mesour\Components\ComponentModel\IContainer
 {
@@ -22,8 +22,8 @@ interface ISelection extends Mesour\Components\ComponentModel\IContainer
 	public function setItems(array $items);
 
 	/**
-	 * @param $status
-	 * @param $text
+	 * @param string $status
+	 * @param string $text
 	 * @return mixed
 	 */
 	public function addStatus($status, $text);
@@ -35,9 +35,9 @@ interface ISelection extends Mesour\Components\ComponentModel\IContainer
 
 	public function getMainCheckboxPrototype();
 
-	public function createItem($item_id, $data = []);
+	public function createItem($itemId, $data = []);
 
-	public function renderItem($item_id, $data = []);
+	public function renderItem($itemId, $data = []);
 
 	public function create($data = []);
 
