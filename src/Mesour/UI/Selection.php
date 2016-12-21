@@ -19,10 +19,10 @@ use Mesour;
 class Selection extends Mesour\Components\Control\OptionsControl implements Mesour\Selection\ISelection
 {
 
+	use Mesour\Icon\HasIcon;
+
 	const ITEMS = 'items';
-
 	const DROP_DOWN = 'drop-down';
-
 	const MAIN = 'main';
 
 	/**
