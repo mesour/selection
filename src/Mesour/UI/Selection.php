@@ -41,7 +41,7 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
 
 	protected $defaults = [
 		self::MAIN => [
-			'el' => 'a',
+			'el' => 'span',
 			'attributes' => [
 				'class' => 'btn btn-default btn-xs mesour-main-checkbox',
 			],
