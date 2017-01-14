@@ -2,13 +2,13 @@
 
 namespace Mesour\SelectionTests\MockRandomStrings;
 
-use Mesour\DropDown\RandomString\MockRandomStringGenerator;
+use Mesour\Components\RandomString\MockRandomStringGenerator;
 
 class DefaultTestRandomString extends MockRandomStringGenerator
 {
 
 	protected $values = [
-		'571caca6cc335',
+		'587a2d27c2aa4',
 	];
 
 }
