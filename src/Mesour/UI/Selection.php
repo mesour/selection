@@ -2,7 +2,7 @@
 /**
  * This file is part of the Mesour Selection (http://grid.mesour.com)
  *
- * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ * Copyright (c) 2017 Matouš Němec (http://mesour.com)
  *
  * For full licence and copyright please view the file licence.md in root of this project
  */
@@ -19,10 +19,10 @@ use Mesour;
 class Selection extends Mesour\Components\Control\OptionsControl implements Mesour\Selection\ISelection
 {
 
+	use Mesour\Icon\HasIcon;
+
 	const ITEMS = 'items';
-
 	const DROP_DOWN = 'drop-down';
-
 	const MAIN = 'main';
 
 	/**
@@ -41,7 +41,7 @@ class Selection extends Mesour\Components\Control\OptionsControl implements Meso
 
 	protected $defaults = [
 		self::MAIN => [
-			'el' => 'a',
+			'el' => 'span',
 			'attributes' => [
 				'class' => 'btn btn-default btn-xs mesour-main-checkbox',
 			],

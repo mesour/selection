@@ -2,9 +2,10 @@
 
 namespace Mesour\SelectionTests;
 
-use Mesour\DropDown\RandomString\CapturingRandomStringGenerator;
-use Mesour\DropDown\RandomString\IRandomStringGenerator;
+use Mesour\Components\RandomString\CapturingRandomStringGenerator;
+use Mesour\Components\RandomString\IRandomStringGenerator;
 use Mesour\SelectionTests\MockRandomStrings\DefaultTestRandomString;
+use Mesour\UI\Application;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -46,7 +47,16 @@ class DefaultTest extends BaseTestCase
 
 	public function testDefault()
 	{
-		$selection = new \Mesour\UI\Selection('test');
+		$application = new Application('mesourApp');
+
+		$application->getContext()
+			->setService($this->randomStringGenerator, IRandomStringGenerator::class);
+
+		$application->setRequest([]);
+
+		$application->run();
+
+		$selection = new \Mesour\UI\Selection('test', $application);
 
 		$items = [
 			1 => 'active',
@@ -61,9 +71,6 @@ class DefaultTest extends BaseTestCase
 		$selection->addStatus('active', 'Active');
 
 		$selection->addStatus('inactive', 'Inactive');
-
-		$selection->getDropDown()
-			->setRandomStringGenerator($this->randomStringGenerator);
 
 		Assert::same(
 			file_get_contents(__DIR__ . '/data/DefaultTestOutput.html'),
@@ -84,15 +91,15 @@ class DefaultTest extends BaseTestCase
 	{
 		switch ($id) {
 			case 1:
-				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="active" data-id="1" data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
+				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="active" data-id="1" data-name="mesourApp-test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
 			case 2:
-				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="2" data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
+				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="2" data-name="mesourApp-test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
 			case 3:
-				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="3" data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
+				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="3" data-name="mesourApp-test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
 			case 4:
-				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="active" data-id="4" data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
+				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="active" data-id="4" data-name="mesourApp-test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
 			case 5:
-				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="5" data-name="test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
+				return '<a class="btn btn-default btn-xs mesour-select-checkbox" data-status="inactive" data-id="5" data-name="mesourApp-test">&nbsp;&nbsp;&nbsp;&nbsp;</a>';
 		}
 		return $id;
 	}

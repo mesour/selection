@@ -27,7 +27,11 @@ require_once SRC_DIR . 'Mesour/UI/Selection.php';
 
 	<?php
 
-	$selection = new \Mesour\UI\Selection('test');
+	$application = new Mesour\UI\Application;
+	$application->setRequest($_REQUEST);
+	$application->run();
+
+	$selection = new \Mesour\UI\Selection('test', $application);
 
 	$items = [
 		1 => 'active',
@@ -66,7 +70,4 @@ require_once SRC_DIR . 'Mesour/UI/Selection.php';
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 		crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="../public/mesour.selection.css">
-
-<script src="../vendor/mesour/components/public/mesour.components.js"></script>
-<script src="../public/mesour.selection.js"></script>
+<script src="../node_modules/mesour-selection/dist/mesour.selection.min.js"></script>
